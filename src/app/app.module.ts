@@ -9,6 +9,10 @@ import { DetailComponent } from './detail/detail.component';
 import { AddComponent } from './add/add.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FooterComponent } from './footer/footer.component';
+import { GalleryComponent } from './gallery/gallery.component';
+import {ServicesModule} from './_services/services.module';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {SharedModule} from './_modules/shared.modules';
 
 @NgModule({
   declarations: [
@@ -17,13 +21,18 @@ import { FooterComponent } from './footer/footer.component';
     ListComponent,
     DetailComponent,
     AddComponent,
-    FooterComponent
+    FooterComponent,
+    GalleryComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    ServicesModule.forRoot(),
+    ReactiveFormsModule,
+    FormsModule,
+    SharedModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

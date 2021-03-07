@@ -1,25 +1,14 @@
 <div class="jumbotron">
   <h1 class="display-3">Hello, Members!</h1>
-  <p class="lead">This is a list of the Gallery members , every member has at least five properties listed in <a class="text-info"
-    routerLink="/detail">Detail site.</a> </p>
+  <p class="lead">This is a list of the Gallery members , every member has at least five properties listed in Detail site.</p>
   <hr class="my-4">
   <p class="lead">
-    <a class="btn btn-primary btn-lg" href="/add" role="button">Be a member!</a>
+    <a class="btn btn-success btn-lg" routerLink="/add" role="button">Be a member!</a>
   </p>
-  <ul class="list-group">
+  <ul class="list-group" *ngFor="let member of members$ | async">
     <li class="list-group-item d-flex justify-content-between align-items-center">
-     Chahed
-      <span class="badge badge-primary badge-pill">14 Collaborations</span>
-    </li>
-    <li class="list-group-item d-flex justify-content-between align-items-center">
-      Stefan
-      <span class="badge badge-primary badge-pill">2 Collaborations</span>
-    </li>
-    <li class="list-group-item d-flex justify-content-between align-items-center">
-      Michaela
-      <span class="badge badge-primary badge-pill">1 Collaborations</span>
+      {{member.firstName}}
+      <button type="button" class="btn btn-outline-success" (click)="getDetailes(member.id)">Details</button>
     </li>
   </ul>
 </div>
-
-
