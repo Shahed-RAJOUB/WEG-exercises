@@ -13,6 +13,8 @@ import { GalleryComponent } from './gallery/gallery.component';
 import {ServicesModule} from './_services/services.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {SharedModule} from './_modules/shared.modules';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {RouterTestingModule} from '@angular/router/testing';
 
 @NgModule({
   declarations: [
@@ -27,12 +29,13 @@ import {SharedModule} from './_modules/shared.modules';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AppRoutingModule,
     NgbModule,
     ServicesModule.forRoot(),
     ReactiveFormsModule,
     FormsModule,
     SharedModule,
+    BrowserAnimationsModule,
+    RouterTestingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

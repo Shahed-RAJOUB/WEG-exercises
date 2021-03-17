@@ -1,6 +1,6 @@
-<table class="table table-hover" *ngIf="member">
+<table  class="table" *ngIf="member">
   <thead>
-  <tr>
+  <tr class="table-success">
     <th scope="col">Property Name</th>
     <th scope="col">Data type</th>
     <th scope="col">Default value</th>
@@ -14,7 +14,7 @@
     <td>{{member.firstName}}</td>
     <td>required</td>
   </tr>
-  <tr>
+  <tr class="table-secondary">
     <th scope="row">Last name</th>
     <td>text</td>
     <td>{{member.lastName}}</td>
@@ -48,6 +48,12 @@
     <th scope="row">Birthday</th>
     <td>Date</td>
     <td>{{member.birthday}}</td>
+    <td>required</td>
+  </tr>
+  <tr class="table-success">
+    <th scope="row">Password</th>
+    <td>text</td>
+    <td>{{member.password}}</td>
     <td>required</td>
   </tr>
   </tbody>

@@ -24,7 +24,8 @@ export class RegisterService {
       member.value.city,
       member.value.country ,
       member.value.zip ,
-      member.value.birthday );
+      member.value.birthday,
+      member.value.password);
     this.members.push(newMember);
     this.memberSubject.next(this.members);
   }
