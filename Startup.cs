@@ -1,3 +1,5 @@
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -39,6 +41,22 @@ namespace MyApp
                     Version = "v1"
                 });
             });
+            /*services.AddCors();*/
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+            JwtSecurityTokenHandler.DefaultOutboundClaimTypeMap.Clear();
+
+            services.AddAuthentication(options => {
+                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                })
+                .AddJwtBearer(options => {
+                    options.Authority = "https://identity-demos.ullrich.wien";
+                    options.Audience = "bif-api";
+                    options.IncludeErrorDetails = true;
+                    options.SaveToken = true;
+                });
+
+            services.AddAuthorization();
 
         }
 
@@ -56,7 +74,17 @@ namespace MyApp
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
+            app.UseCsp(config => {
+                config.DefaultSources(cfg => cfg.Self())
+                    .ScriptSources(cfg => cfg.Self().UnsafeInline().UnsafeEval())
+                    .StyleSources(cfg => cfg.Self().UnsafeInline().CustomSources("https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"))
+                    .ConnectSources(cfg => cfg.Self().CustomSources("https://identity-demos.ullrich.wien"))
+                    .FontSources(cfg => cfg.Self().CustomSources("https://fonts.gstatic.com"))
+                    .MediaSources(cfg => cfg.None())
+                    .FrameSources(cfg => cfg.None())
+                    .FrameAncestors(cfg => cfg.None())
+                    .ImageSources(cfg => cfg.Self().CustomSources("data:"));
+            });
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             if (!env.IsDevelopment())
@@ -70,6 +98,11 @@ namespace MyApp
             {
                 c.SwaggerEndpoint("v1/swagger.json", "My Gallery App API V1");
             });
+            /*app.UseCors(x =>
+                x.AllowAnyHeader().AllowAnyMethod()
+                    .WithOrigins("https://localhost:4200")); // it comes from angular my client*/
+            app.UseAuthentication();
+            app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

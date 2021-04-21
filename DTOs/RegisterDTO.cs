@@ -4,13 +4,9 @@ namespace MyApp.DTOs
 {
     public class RegisterDTO
     {
-        [Required] public string FirstName{ get; set; }
-        [Required] public string LastName{ get; set; }
-        [Required] public string Email{ get; set; }
-        [Required] public string City{ get; set; }
-        [Required] public string Country{ get; set; }
-        [Required] public string Zip{ get; set; }
-        [Required] public string Birthday{ get; set; }
-        [Required] public string Password{ get; set; }
+        [Required] public string UserName { get; set; }
+        [Required] public string UserEmail{ get; set; }
+        [Required] public string fotoTitle{ get; set; }
+        public string UserSubject { get; set; }
     }
 }

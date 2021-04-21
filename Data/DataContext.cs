@@ -9,5 +9,6 @@ namespace MyApp.Data
         {
         }
         public DbSet<AppMember> Members { get; set; }
+        public DbSet<AppFoto> Fotos { get; set; }
     }
 }
